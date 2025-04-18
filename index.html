@@ -3,24 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QR Code Generator</title>
-  <link rel="stylesheet" href="styles.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3664358887358586"
-     crossorigin="anonymous"></script>
-  <meta name="google-adsense-account" content="ca-pub-3664358887358586">
+  <title>YouTube Thumbnail Downloader</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>QR Code Generator</h1>
-    <input type="text" id="qrInput" placeholder="Enter text or URL">
-    <button onclick="generateQRCode()">Generate QR Code</button>
-    <div id="qrContainer">
-      <canvas id="qrCode"></canvas>
-    </div>
-    <button id="downloadBtn" onclick="downloadQRCode()" style="display:none;">Download QR Code</button>
+    <h1>YouTube Thumbnail Downloader</h1>
+    <input type="text" id="videoUrl" placeholder="Paste YouTube URL here" />
+    <button onclick="fetchThumbnail()">Get Thumbnail</button>
+    <button class="clear-btn" onclick="clearHistory()">Clear History</button>
+
+    <div id="thumbnails"></div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrious/dist/qrious.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
