@@ -1,72 +1,49 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 20px;
+  background: #f4f4f4;
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  max-width: 700px;
-  margin: 0 auto;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
 }
 
 input {
   width: 80%;
   padding: 10px;
-  font-size: 1rem;
-  margin: 10px 0;
+  margin: 15px 0;
+  font-size: 16px;
 }
 
 button {
-  padding: 10px 15px;
-  font-size: 1rem;
-  margin: 5px;
-  cursor: pointer;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 16px;
   border: none;
-  background-color: #0073e6;
+  background: #007bff;
   color: white;
-  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button.clear-btn {
+  background: #dc3545;
 }
 
 button:hover {
-  background-color: #005bb5;
+  opacity: 0.9;
 }
 
-.clear-btn {
-  background-color: #ff5252;
-}
-
-.clear-btn:hover {
-  background-color: #e53935;
-}
-
-#thumbnails {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.thumbnail {
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-
-.thumbnail img {
-  max-width: 100%;
-  border-radius: 5px;
-}
-
-.thumbnail a {
-  display: block;
-  margin-top: 5px;
-  color: #0073e6;
-  text-decoration: none;
+#qrOutput img,
+#qrHistory img {
+  margin: 10px;
+  width: 150px;
+  height: 150px;
 }
