@@ -1,54 +1,47 @@
-function getVideoId(url) {
-  const regExp = /^.*((youtu.be\/)|(v\/)|(u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-  const match = url.match(regExp);
-  return (match && match[7].length === 11) ? match[7] : null;
-}
+function generateQR() {
+  const input = document.getElementById("qrInput").value.trim();
+  const output = document.getElementById("qrOutput");
+  const history = document.getElementById("qrHistory");
 
-function generateThumbnailHtml(videoId) {
-  const imgUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-  return `
-    <div class="thumbnail">
-      <img src="${imgUrl}" alt="YouTube Thumbnail" />
-      <a href="${imgUrl}" download>Download Thumbnail</a>
-    </div>
-  `;
-}
-
-function fetchThumbnail() {
-  const url = document.getElementById("videoUrl").value.trim();
-  const videoId = getVideoId(url);
-
-  if (!videoId) {
-    alert("Invalid YouTube URL");
+  if (!input) {
+    alert("Please enter some text or URL!");
     return;
   }
 
-  const html = generateThumbnailHtml(videoId);
-  document.getElementById("thumbnails").insertAdjacentHTML("afterbegin", html);
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(input)}`;
 
-  saveToHistory(videoId);
+  // Show current QR
+  output.innerHTML = `<img src="${qrUrl}" alt="QR Code" />`;
+
+  // Save and update history
+  const saved = JSON.parse(localStorage.getItem("qrHistory") || "[]");
+  saved.unshift(qrUrl);
+  localStorage.setItem("qrHistory", JSON.stringify(saved.slice(0, 10)));
+  renderHistory();
 }
 
-function saveToHistory(videoId) {
-  let history = JSON.parse(localStorage.getItem("thumbnailHistory")) || [];
-  if (!history.includes(videoId)) {
-    history.unshift(videoId);
-    localStorage.setItem("thumbnailHistory", JSON.stringify(history));
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem("qrHistory") || "[]");
+  const historyContainer = document.getElementById("qrHistory");
+  historyContainer.innerHTML = "";
+
+  if (history.length === 0) {
+    historyContainer.innerHTML = "<p>No history yet.</p>";
+    return;
   }
-}
 
-function loadHistory() {
-  const history = JSON.parse(localStorage.getItem("thumbnailHistory")) || [];
-  history.forEach(videoId => {
-    const html = generateThumbnailHtml(videoId);
-    document.getElementById("thumbnails").insertAdjacentHTML("beforeend", html);
+  history.forEach(url => {
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = "Previous QR";
+    historyContainer.appendChild(img);
   });
 }
 
 function clearHistory() {
-  localStorage.removeItem("thumbnailHistory");
-  document.getElementById("thumbnails").innerHTML = "";
+  localStorage.removeItem("qrHistory");
+  renderHistory();
+  document.getElementById("qrOutput").innerHTML = "";
 }
 
-// Load thumbnails on page load
-document.addEventListener("DOMContentLoaded", loadHistory);
+document.addEventListener("DOMContentLoaded", renderHistory);
