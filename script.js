@@ -1,47 +1,43 @@
-function generateQR() {
-  const input = document.getElementById("qrInput").value.trim();
-  const output = document.getElementById("qrOutput");
-  const history = document.getElementById("qrHistory");
-
+function generateQRCode() {
+  const input = document.getElementById('qrInput').value.trim();
+  const output = document.getElementById('qrOutput');
   if (!input) {
-    alert("Please enter some text or URL!");
+    output.innerHTML = "<p>Please enter a URL or text.</p>";
     return;
   }
 
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(input)}`;
+  const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(input)}`;
+  output.innerHTML = `<img src="${qrURL}" alt="QR Code" />`;
 
-  // Show current QR
-  output.innerHTML = `<img src="${qrUrl}" alt="QR Code" />`;
-
-  // Save and update history
-  const saved = JSON.parse(localStorage.getItem("qrHistory") || "[]");
-  saved.unshift(qrUrl);
-  localStorage.setItem("qrHistory", JSON.stringify(saved.slice(0, 10)));
-  renderHistory();
+  saveToHistory(input);
+  displayHistory();
 }
 
-function renderHistory() {
-  const history = JSON.parse(localStorage.getItem("qrHistory") || "[]");
-  const historyContainer = document.getElementById("qrHistory");
-  historyContainer.innerHTML = "";
-
-  if (history.length === 0) {
-    historyContainer.innerHTML = "<p>No history yet.</p>";
-    return;
+function saveToHistory(text) {
+  let history = JSON.parse(localStorage.getItem("qrHistory")) || [];
+  if (!history.includes(text)) {
+    history.unshift(text);
+    localStorage.setItem("qrHistory", JSON.stringify(history.slice(0, 10))); // Limit to 10 items
   }
-
-  history.forEach(url => {
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = "Previous QR";
-    historyContainer.appendChild(img);
-  });
 }
 
-function clearHistory() {
+function displayHistory() {
+  const history = JSON.parse(localStorage.getItem("qrHistory")) || [];
+  const container = document.getElementById("qrHistory");
+  container.innerHTML = history.map(item => {
+    const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(item)}`;
+    return `
+      <div class="history-item">
+        <img src="${qrURL}" alt="QR">
+        <p>${item}</p>
+      </div>
+    `;
+  }).join("");
+}
+
+function clearQRHistory() {
   localStorage.removeItem("qrHistory");
-  renderHistory();
-  document.getElementById("qrOutput").innerHTML = "";
+  displayHistory();
 }
 
-document.addEventListener("DOMContentLoaded", renderHistory);
+document.addEventListener("DOMContentLoaded", displayHistory);
