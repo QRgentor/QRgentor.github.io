@@ -1,49 +1,63 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  text-align: center;
   margin: 0;
   padding: 0;
+  background: #f7f7f7;
 }
 
-.container {
-  max-width: 600px;
-  margin: 40px auto;
-  background: #fff;
+header {
+  background: #333;
+  color: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-input {
-  width: 80%;
+header nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+input, textarea, button {
+  display: block;
+  margin: 10px auto;
   padding: 10px;
-  margin: 15px 0;
-  font-size: 16px;
+  width: 80%;
+  max-width: 400px;
 }
 
 button {
-  padding: 10px 20px;
-  margin: 10px 5px;
-  font-size: 16px;
-  border: none;
-  background: #007bff;
+  background: #333;
   color: white;
+  border: none;
   cursor: pointer;
-  border-radius: 4px;
-}
-
-button.clear-btn {
-  background: #dc3545;
 }
 
 button:hover {
-  opacity: 0.9;
+  background: #555;
 }
 
-#qrOutput img,
-#qrHistory img {
-  margin: 10px;
-  width: 150px;
-  height: 150px;
+#qrOutput {
+  margin-top: 20px;
+}
+
+footer {
+  background: #eee;
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.contact-form {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
