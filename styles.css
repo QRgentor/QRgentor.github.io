@@ -61,3 +61,36 @@ footer {
   margin: auto;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+#historySection {
+  margin-top: 40px;
+}
+
+#qrHistory {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.history-item {
+  text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.history-item img {
+  display: block;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+}
+
+#clearHistoryBtn {
+  margin-top: 20px;
+  background-color: #c0392b;
+  color: white;
+}
+
