@@ -7,16 +7,33 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
+  <header>
     <h1>QR Code Generator</h1>
+    <p>Generate QR codes for URLs, text, and more in one click!</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
     <input type="text" id="qrInput" placeholder="Enter text or URL" />
-    <button onclick="generateQR()">Generate QR Code</button>
-    <button onclick="clearHistory()" class="clear-btn">Clear History</button>
+    <button onclick="generateQRCode()">Generate QR Code</button>
     <div id="qrOutput"></div>
 
-    <h2>History</h2>
-    <div id="qrHistory"></div>
-  </div>
+    <section id="historySection">
+      <h2>QR History</h2>
+      <div id="qrHistory"></div>
+      <button id="clearHistoryBtn" onclick="clearQRHistory()">Clear History</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 QR Code Generator. All rights reserved.</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
